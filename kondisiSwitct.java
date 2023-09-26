@@ -5,6 +5,7 @@ public class kondisiSwitct {
         Scanner input = new Scanner(System.in);
         System.out.printf("masukan angka : ");
         int angka = input.nextInt();
+        System.out.println("=============================================================================");
         switch (angka) {
             case 1:
                 System.out.println("senin");
@@ -27,8 +28,8 @@ public class kondisiSwitct {
             case 7:
                 System.out.println("minggu");
                 break;
-
             default:
+                System.out.println("hari tidak ada");
                 break;
         }
     }
