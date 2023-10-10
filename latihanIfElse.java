@@ -7,7 +7,7 @@ public class latihanIfElse {
         int angka = key.nextInt();
         int sisa = angka % 2;
 
-        if (sisa == 1) {
+        if (sisa <= 1 ) {
             System.out.println("Nilai " + angka + " termasuk bilangan ganjil ");
         } else {
             System.out.println("Nilai " + angka + " termasuk bilangan genap");
