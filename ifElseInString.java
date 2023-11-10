@@ -6,7 +6,7 @@ public class ifElseInString {
         System.out.println("apakah kamu menyukai ku? ");
         String jawaban = inp.nextLine();
 
-        if (jawaban.equals("ya")) {
+        if (jawaban.equals("ya"))  {
             System.out.println("yes maan cewek");
         } else {
             System.out.println("menjomblo lagi");
