@@ -2,6 +2,10 @@ package pratek;
 
 import java.util.Scanner;
 
+//nama: i wayan pius wiprajana samita
+//NIM : 2315354034
+//kelas : 1B TRPL
+
 public class pratek1 {
     public static void main(String[] args) {
         Scanner inp = new Scanner(System.in);

@@ -1,0 +1,4 @@
+brg01	cocacola	10	10000
+brg02	pepsodent	8	5000
+brg03	susu ultra	2	7000
+brg04	kopi	3	1000
