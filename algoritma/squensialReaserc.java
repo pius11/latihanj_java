@@ -11,7 +11,7 @@ public class squensialReaserc {
         System.out.println("nilai berapa yang ingin di cari");
 
         int nilaicari = inp.nextInt();
-        liniersearch(nilaicari, arr);
+        // liniersearch(nilaicari, arr);
         binarysearch(nilaicari, arr);
     }
 

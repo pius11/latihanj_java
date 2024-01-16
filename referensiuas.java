@@ -238,9 +238,11 @@ public class referensiuas {
     // Metode untuk operasi Enqueue (Queue)
     private static void enqueue(int element) {
         if (!isFullQueue()) {
+
             if (front == -1) {
                 front = 0;
             }
+
             rear = (rear + 1) % MAX_SIZE;
             array[rear] = element;
         } else {
@@ -298,7 +300,12 @@ public class referensiuas {
         for (int i = 0; i < MAX_SIZE; i++) {
             if (tempArray[i] != 0) {
                 enqueue(tempArray[i]);
+
+                System.out.println(tempArray[i]+" ");
             }
+
         }
+        System.out.println();
     }
+
 }
