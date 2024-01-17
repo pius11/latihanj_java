@@ -88,7 +88,7 @@ public class uas {
         for (int i = 0; i < n; i++) {
             int key = array2[i];
             int j = i - 1;
-            while (j >= 0 && array2[j] > key) {
+            while (j >= 0 && array2[j] < key) {
                 array2[j + 1] = array2[j];
                 j = j - 1;
             }
