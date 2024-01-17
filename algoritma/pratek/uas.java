@@ -2,7 +2,6 @@ package pratek;
 
 import java.util.Scanner;
 
-import javax.lang.model.element.Element;
 
 public class uas {
     public static int[] array = { 1, 2, 3, 4, 5 };// untuk binarysearch
@@ -224,7 +223,7 @@ public class uas {
         int choise;
 
         do {
-            System.out.println("STACK MENU");
+            System.out.println("QUEUE MENU");
             System.out.println("============================================");
             System.out.println("1. Enqueue");
             System.out.println("2. Dequeue");
