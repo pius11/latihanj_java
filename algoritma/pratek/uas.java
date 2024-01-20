@@ -2,22 +2,28 @@ package pratek;
 
 import java.util.Scanner;
 
-
 public class uas {
-    public static int[] array = { 1, 2, 3, 4, 5 };// untuk binarysearch
-    public static int[] array2 = { 2, 1, 5, 3, 4 };// untuk insertion descending
+    // Array untuk binary search
+    public static int[] array = { 1, 2, 3, 4, 5 };
+    // Array untuk insertion sort descending
+    public static int[] array2 = { 2, 1, 5, 3, 4 };
+    // Konstanta untuk ukuran maksimal stack dan queue
     public static final int MAX_SIZE = 5;
-    public static int[] arr = new int[MAX_SIZE];// untuk stack
-    public static int[] arr2 = new int[MAX_SIZE];// untuk queue
-    private static int top = -1; // Untuk stack
-    private static int front = -1, rear = -1; // Untuk queue
+    // Array untuk stack
+    public static int[] arr = new int[MAX_SIZE];
+    // Array untuk queue
+    public static int[] arr2 = new int[MAX_SIZE];
+    // Pointer atas (top) untuk stack
+    private static int top = -1;
+    // Pointer depan dan belakang untuk queue
+    private static int front = -1, rear = -1;
 
     public static void main(String[] args) {
         Scanner inp = new Scanner(System.in);
 
         int choice;
         do {
-
+            // Tampilan menu utama
             System.out.println("HOME MENU");
             System.out.println("======================================================");
             System.out.println("1. Binary search");
@@ -31,57 +37,60 @@ public class uas {
 
             switch (choice) {
                 case 1:
-                    System.out.println("masuka nilai yang ingin di cari");
-                    int nilaicari = inp.nextInt();
-                    int result = binarySearch(nilaicari);
+                    // Pilihan 1: Binary Search
+                    System.out.println("Masukkan nilai yang ingin dicari:");
+                    int nilaiCari = inp.nextInt();
+                    int result = binarySearch(nilaiCari);
                     if (result == -1) {
-                        System.out.println("data tidak ditemukan");
+                        System.out.println("Data tidak ditemukan");
                     } else {
-                        System.out.println("data di temukan pada index ke " + result);
+                        System.out.println("Data ditemukan pada index ke " + result);
                     }
                     break;
                 case 2:
+                    // Pilihan 2: Insertion Sort Descending
                     insertiondes();
                     break;
                 case 3:
+                    // Pilihan 3: Stack
                     stackMenu(inp);
                     break;
                 case 4:
+                    // Pilihan 4: Queue
                     queueMenu(inp);
                     break;
                 case 0:
-                    System.out.println("terimakasi, program shut down");
+                    // Pilihan 0: Keluar dari program
+                    System.out.println("Terimakasih, program shutdown");
                     break;
-
                 default:
-                    System.out.println("masukan tidak ditemukan");
+                    System.out.println("Masukan tidak ditemukan");
                     break;
             }
 
         } while (choice != 0);
     }
 
-    // binarysearch
-    public static int binarySearch(int nilaicari) {
-
+    // Subprogram binary search
+    public static int binarySearch(int nilaiCari) {
         int low = 0;
-        int hight = array.length - 1;
+        int high = array.length - 1;
 
-        while (low <= hight) {
-            int mid = (low + hight) / 2;
+        while (low <= high) {
+            int mid = (low + high) / 2;
 
-            if (array[mid] == nilaicari) {
+            if (array[mid] == nilaiCari) {
                 return mid;
-            } else if (array[mid] < nilaicari) {
+            } else if (array[mid] < nilaiCari) {
                 low = mid + 1;
             } else {
-                hight = mid - 1;
+                high = mid - 1;
             }
         }
         return -1;
     }
 
-    // insertiondes
+    // Subprogram insertion sort descending
     public static void insertiondes() {
         int n = array2.length;
         for (int i = 0; i < n; i++) {
@@ -92,267 +101,312 @@ public class uas {
                 j = j - 1;
             }
             array2[j + 1] = key;
-
         }
+        // Menampilkan hasil insertion sort
+        System.out.print("Hasil Insertion Sort Descending: ");
         for (int k : array2) {
             System.out.print(k + " ");
-
         }
         System.out.println();
     }
 
-    // stack menu
-
+    // Subprogram untuk menu stack
     public static void stackMenu(Scanner inp) {
-        int choise;
+        int choice;
 
         do {
+            // Tampilan menu stack
             System.out.println("STACK MENU");
             System.out.println("============================================");
             System.out.println("1. Push");
             System.out.println("2. Pop");
-            System.out.println("3. Is full");
-            System.out.println("4. Is empty");
-            System.out.println("5. Revers");
-            System.out.println("0. Back to home menu");
-            choise = inp.nextInt();
+            System.out.println("3. Is Full");
+            System.out.println("4. Is Empty");
+            System.out.println("5. Reverse");
+            System.out.println("6. show data");
+            System.out.println("0. Back to Home Menu");
+
+            choice = inp.nextInt();
             inp.nextLine();
 
-            switch (choise) {
+            switch (choice) {
                 case 1:
-                    System.out.println("masukan data");
+                    // Pilihan 1: Push
+                    System.out.println("Masukkan data:");
                     int elemen = inp.nextInt();
-                    stackPush(elemen);
-                    System.out.println(elemen + " data berhasil di tambahkan");
+                    if (!isFullStack()) {
+                        stackPush(elemen);
+                        System.out.println(elemen + " data berhasil ditambahkan");
+                    } else {
+                        System.out.println("Stack penuh, tidak dapat menambahkan data lagi");
+                    }
                     break;
                 case 2:
+                    // Pilihan 2: Pop
                     int elemenPop = stackPop();
                     if (elemenPop != -1) {
-                        System.out.println("data " + elemenPop + " telah kelua/pop dari stack");
+                        System.out.println("Data " + elemenPop + " telah keluar/pop dari stack");
                     } else {
-                        System.out.println("stack kosong, push data terlebih dahulu");
+                        System.out.println("Stack kosong, push data terlebih dahulu");
                     }
                     break;
                 case 3:
+                    // Pilihan 3: Is Full
                     if (isFullStack()) {
-                        System.out.println("data sudah penuh");
+                        System.out.println("Data sudah penuh");
                     } else {
-                        System.out.println("data belum penuh");
+                        System.out.println("Data belum penuh");
                     }
                     break;
                 case 4:
+                    // Pilihan 4: Is Empty
                     if (isEmptyStack()) {
-                        System.out.println("data kosong");
+                        System.out.println("Data kosong");
                     } else {
-                        System.out.println("data tidak kosong");
+                        System.out.println("Data tidak kosong");
                     }
                     break;
                 case 5:
+                    // Pilihan 5: Reverse Stack
                     reverseStack();
-                    System.out.println("stack berhasil di revers");
+                    System.out.println("Stack berhasil di-reverse");
+                    break;
+                case 6:
+                    showStack();
                     break;
                 case 0:
-                    System.out.println(" back to home menu ");
+                    // Pilihan 0: Kembali ke menu utama
+                    System.out.println("Kembali ke home menu");
                     break;
-
                 default:
-                    System.out.println("masukan tidak di temukan");
+                    System.out.println("Masukan tidak ditemukan");
                     break;
             }
-        } while (choise != 0);
+        } while (choice != 0);
     }
 
-    // stack program
-
-    // stack push
-
+    // Subprogram stack push
     public static void stackPush(int elemen) {
 
-        if (!isFullStack()) {
-            arr[++top] = elemen;
-
-        } else {
-            System.out.println("stack penuh, tidak dapat menambhakan data lagi");
-        }
+        arr[++top] = elemen;
 
     }
 
-    // pop
-
+    // Subprogram stack pop
     public static int stackPop() {
-
         if (!isEmptyStack()) {
             return arr[top--];
-
         } else {
-            return -1; // jika stack kosong
+            return -1; // Jika stack kosong
         }
     }
 
-    // is empty
+    // Subprogram stack is empty
     public static boolean isEmptyStack() {
         return top == -1;
     }
 
-    // is full
+    // Subprogram stack is full
     public static boolean isFullStack() {
         return top == MAX_SIZE - 1;
     }
 
-    // reverse stack
-
+    // Subprogram reverse stack
     public static void reverseStack() {
         int[] tempArray = new int[MAX_SIZE];
-        int temtop = -1;
+        int tempTop = -1;
 
         while (!isEmptyStack()) {
+            // untuk mengeluarkan elemnt dan memasukan ke array sementara
             int elemen = stackPop();
-            tempArray[++temtop] = elemen;
+            tempArray[++tempTop] = elemen;
         }
-        System.out.println("hasil revese: ");
-        while (temtop != -1) {
-            int elemen = tempArray[temtop--];
+
+        System.out.println("Hasil Reverse Stack:");
+        while (tempTop != -1) {
+            int elemen = tempArray[tempTop--];
             stackPush(elemen);
-            System.out.println(elemen + " ");
+            System.out.print(elemen + " ");
         }
         System.out.println();
     }
 
-    // queue menu
+    public static void showStack() {
+        System.out.println("show data");
+        for (int i = top; i >= 0; i--) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+
+    // Subprogram untuk menu queue
     public static void queueMenu(Scanner inp) {
-        int choise;
+        int choice;
 
         do {
+            // Tampilan menu queue
             System.out.println("QUEUE MENU");
             System.out.println("============================================");
             System.out.println("1. Enqueue");
             System.out.println("2. Dequeue");
-            System.out.println("3. Is full");
-            System.out.println("4. Is empty");
-            System.out.println("5. Revers");
-            System.out.println("0. Back to home menu");
-            choise = inp.nextInt();
+            System.out.println("3. Is Full");
+            System.out.println("4. Is Empty");
+            System.out.println("5. Reverse");
+            System.out.println("6. show data");
+            System.out.println("0. Back to Home Menu");
+
+            choice = inp.nextInt();
             inp.nextLine();
 
-            switch (choise) {
+            switch (choice) {
                 case 1:
+                    // Pilihan 1: Enqueue
                     System.out.println("masukan data");
                     int elemen = inp.nextInt();
-                    enqueue(elemen);
-                    if (!isFullQueue()) {
+                    int queueResult = enqueue(elemen);
+
+                    if (queueResult == 0) {
                         System.out.println(elemen + " data berhasil di tambahkan");
                     } else {
-                        System.out.println("queue penuh, tidak dapat menambah kan data lagi");
+                        System.out.println("Queue penuh, tidak dapat menambahkan data lagi");
                     }
                     break;
                 case 2:
+                    // Pilihan 2: Dequeue
                     int elemenDequeue = dequeue();
                     if (elemenDequeue != -1) {
-                        System.out.println("data " + elemenDequeue + " telah kelua/dequeue dari queue");
+                        System.out.println("Data " + elemenDequeue + " telah keluar/dequeue dari queue");
                     } else {
-                        System.out.println("queue kosong, push data terlebih dahulu");
+                        System.out.println("Queue kosong, enqueue data terlebih dahulu");
                     }
                     break;
                 case 3:
+                    // Pilihan 3: Is Full
                     if (isFullQueue()) {
-                        System.out.println("data sudah penuh");
+                        System.out.println("Data sudah penuh");
                     } else {
-                        System.out.println("data belum penuh");
+                        System.out.println("Data belum penuh");
                     }
                     break;
                 case 4:
+                    // Pilihan 4: Is Empty
                     if (isEmptyQueue()) {
-                        System.out.println("data kosong");
+                        System.out.println("Data kosong");
                     } else {
-                        System.out.println("data tidak kosong");
+                        System.out.println("Data tidak kosong");
                     }
                     break;
                 case 5:
+                    // Pilihan 5: Reverse Queue
                     reverseQueue();
-                    System.out.println("stack berhasil di revers");
+                    System.out.println("Queue berhasil di-reverse");
+                    break;
+                case 6:
+                    // Pilihan 5: Reverse Queue
+                    showQueue();
                     break;
                 case 0:
-                    System.out.println(" back to home menu ");
+                    // Pilihan 0: Kembali ke menu utama
+                    System.out.println("Kembali ke home menu");
                     break;
-
                 default:
-                    System.out.println("masukan tidak di temukan");
+                    System.out.println("Masukan tidak ditemukan");
                     break;
             }
-        } while (choise != 0);
+        } while (choice != 0);
     }
 
-    // enqueue
-    public static void enqueue(int elemen) {
+    // Subprogram enqueue
+    public static int enqueue(int elemen) {
         if (!isFullQueue()) {
+            // Jika queue masih memiliki kapasitas dan front belum diatur, atur front ke
+            // angka selanjutnya
             if (front == -1) {
                 front = 0;
             }
-
+            // Menentukan indeks rear untuk menambahkan elemen menggunakan operator modulus
             rear = (rear + 1) % MAX_SIZE;
-            array2[rear] = elemen;
-        }
-    }
+            arr2[rear] = elemen;
+            
+            return 0;
 
-    // dequeue
-    public static int dequeue() {
-        if (!isEmptyQueue()) {
-            int elemen = array2[front];
-
-            if (front == rear) {
-                front = rear = -1;
-
-            } else {
-                front = (front + 1) % MAX_SIZE;
-            }
-            return elemen;
         } else {
-
+            // Jika queue penuh, cetak pesan bahwa queue penuh dan tidak dapat menambahkan
+            // data lagi
+            
             return -1;
         }
     }
 
-    // is full queue
+    // Subprogram dequeue
+    public static int dequeue() {
+        if (!isEmptyQueue()) {
+            int elemen = arr2[front];
+
+            
+            if (front == rear) {
+                
+                front = rear = -1;
+            } else {
+                
+                front = (front + 1) % MAX_SIZE;
+            }
+            return elemen;
+        } else {
+            return -1;
+        }
+    }
+
+    // Subprogram is full queue
     public static boolean isFullQueue() {
         return (front == 0 && rear == MAX_SIZE - 1) || (front == rear + 1);
-
     }
 
-    // is empty queue
-
+    // Subprogram is empty queue
     public static boolean isEmptyQueue() {
         return front == -1;
-
     }
 
-    // Metode untuk operasi Reverse Queue
+    // Subprogram untuk operasi Reverse Queue
     private static void reverseQueue() {
         int[] tempArray = new int[MAX_SIZE];
         int tempFront = front;
         int tempRear = rear;
 
         while (!isEmptyQueue()) {
+            
             int element = dequeue();
             tempArray[tempRear] = element;
-
+            
             if (tempFront == tempRear) {
                 break;
             }
-
+            
             tempRear = (tempRear - 1 + MAX_SIZE) % MAX_SIZE;
         }
-
-        front = tempFront;
-        rear = tempRear;
-
+        
         System.out.println("Queue setelah di-reverse:");
         for (int i = 0; i < MAX_SIZE; i++) {
             if (tempArray[i] != 0) {
-                enqueue(tempArray[i]);
+
                 System.out.print(tempArray[i] + " ");
+                enqueue(tempArray[i]);
             }
         }
         System.out.println();
     }
 
+    public static void showQueue() {
+        System.out.println("show data");
+        if (!isEmptyQueue()) {
+            int current = front;
+            do {
+                System.out.print(arr2[current] + " ");
+                current = (current + 1) % MAX_SIZE;
+            } while (current != (rear + 1) % MAX_SIZE);
+        } else {
+            System.out.println("Queue kosong");
+        }
+        System.out.println();
+    }
+    
 }
