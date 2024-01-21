@@ -31,7 +31,7 @@ public class uas {
             System.out.println("3. Stack");
             System.out.println("4. Queue");
             System.out.println("0. Exit");
-
+            System.out.print("=> ");
             choice = inp.nextInt();
             inp.nextLine();
 
@@ -39,6 +39,7 @@ public class uas {
                 case 1:
                     // Pilihan 1: Binary Search
                     System.out.println("Masukkan nilai yang ingin dicari:");
+                    System.out.print("=> ");
                     int nilaiCari = inp.nextInt();
                     int result = binarySearch(nilaiCari);
                     if (result == -1) {
@@ -125,7 +126,7 @@ public class uas {
             System.out.println("5. Reverse");
             System.out.println("6. show data");
             System.out.println("0. Back to Home Menu");
-
+            System.out.print("=> ");
             choice = inp.nextInt();
             inp.nextLine();
 
@@ -133,6 +134,7 @@ public class uas {
                 case 1:
                     // Pilihan 1: Push
                     System.out.println("Masukkan data:");
+                    System.out.print("=>");
                     int elemen = inp.nextInt();
                     if (!isFullStack()) {
                         stackPush(elemen);
@@ -215,14 +217,14 @@ public class uas {
     public static void reverseStack() {
         int[] tempArray = new int[MAX_SIZE];
         int tempTop = -1;
-
+        // Mengeluarkan elemen dari stack dan menyimpannya dalam array sementara
         while (!isEmptyStack()) {
-            // untuk mengeluarkan elemnt dan memasukan ke array sementara
             int elemen = stackPop();
             tempArray[++tempTop] = elemen;
         }
 
         System.out.println("Hasil Reverse Stack:");
+        // Menambahkan kembali elemen ke stack dan menampilkan hasilnya
         while (tempTop != -1) {
             int elemen = tempArray[tempTop--];
             stackPush(elemen);
@@ -236,6 +238,7 @@ public class uas {
         for (int i = top; i >= 0; i--) {
             System.out.print(arr[i] + " ");
         }
+        System.out.println();
     }
 
     // Subprogram untuk menu queue
@@ -253,7 +256,7 @@ public class uas {
             System.out.println("5. Reverse");
             System.out.println("6. show data");
             System.out.println("0. Back to Home Menu");
-
+            System.out.print("=> ");
             choice = inp.nextInt();
             inp.nextLine();
 
@@ -261,6 +264,7 @@ public class uas {
                 case 1:
                     // Pilihan 1: Enqueue
                     System.out.println("masukan data");
+                    System.out.print("=> ");
                     int elemen = inp.nextInt();
                     int queueResult = enqueue(elemen);
 
@@ -326,13 +330,11 @@ public class uas {
             // Menentukan indeks rear untuk menambahkan elemen menggunakan operator modulus
             rear = (rear + 1) % MAX_SIZE;
             arr2[rear] = elemen;
-            
+
             return 0;
 
         } else {
-            // Jika queue penuh, cetak pesan bahwa queue penuh dan tidak dapat menambahkan
-            // data lagi
-            
+
             return -1;
         }
     }
@@ -341,18 +343,17 @@ public class uas {
     public static int dequeue() {
         if (!isEmptyQueue()) {
             int elemen = arr2[front];
-
-            
+            // Memeriksa apakah front dan rear berada di elemen terakhir (queue hanya
+            // memiliki satu elemen)
             if (front == rear) {
-                
                 front = rear = -1;
             } else {
-                
+                // Jika tidak, memindahkan front ke elemen selanjutnya
                 front = (front + 1) % MAX_SIZE;
             }
             return elemen;
         } else {
-            return -1;
+            return -1; // Jika queue kosong
         }
     }
 
@@ -372,24 +373,24 @@ public class uas {
         int tempFront = front;
         int tempRear = rear;
 
+        // Mengeluarkan data dari queue dan memasukkan ke dalam array sementara
         while (!isEmptyQueue()) {
-            
             int element = dequeue();
             tempArray[tempRear] = element;
-            
+            // Memeriksa apakah front dan rear berada pada elemen terakhir
             if (tempFront == tempRear) {
                 break;
             }
-            
+            // Memindahkan rear ke indeks sebelumnya (untuk memasukkan dari belakang ke
+            // depan)
             tempRear = (tempRear - 1 + MAX_SIZE) % MAX_SIZE;
         }
-        
         System.out.println("Queue setelah di-reverse:");
+        // Memasukkan data dari array sementara ke dalam queue (dari belakang ke depan)
         for (int i = 0; i < MAX_SIZE; i++) {
             if (tempArray[i] != 0) {
-
                 System.out.print(tempArray[i] + " ");
-                enqueue(tempArray[i]);
+                enqueue(tempArray[i]); // Memasukkan kembali data ke dalam queue
             }
         }
         System.out.println();
@@ -397,16 +398,19 @@ public class uas {
 
     public static void showQueue() {
         System.out.println("show data");
+        // Memeriksa apakah queue kosong
         if (!isEmptyQueue()) {
             int current = front;
+            // Melakukan loop untuk menampilkan data dari front hingga rear
             do {
                 System.out.print(arr2[current] + " ");
                 current = (current + 1) % MAX_SIZE;
-            } while (current != (rear + 1) % MAX_SIZE);
+            } while (current != (rear + 1) % MAX_SIZE); // Loop hingga mencapai rear+1 untuk menampilkan semua data
         } else {
+            // Jika queue kosong, cetak pesan "Queue kosong"
             System.out.println("Queue kosong");
         }
-        System.out.println();
+        System.out.println(); // Pindah ke baris baru setelah menampilkan data queue
     }
-    
+
 }
