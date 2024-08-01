@@ -6,7 +6,7 @@ public class uas {
     // Array untuk binary search
     public static int[] array = { 1, 2, 3, 4, 5 };
     // Array untuk insertion sort descending
-    public static int[] array2 = { 2, 1, 5, 3, 4 };
+    public static int[] array2 = { 5, 1, 2, 3, 4 };
     // Konstanta untuk ukuran maksimal stack dan queue
     public static final int MAX_SIZE = 5;
     // Array untuk stack
@@ -18,6 +18,9 @@ public class uas {
     // Pointer depan dan belakang untuk queue
     private static int front = -1, rear = -1;
 
+    // nama : i wayan pius wiprajana samita
+    // nim : 2315354034
+    // kelas : 1B TRPL
     public static void main(String[] args) {
         Scanner inp = new Scanner(System.in);
 
@@ -102,13 +105,15 @@ public class uas {
                 j = j - 1;
             }
             array2[j + 1] = key;
-        }
-        // Menampilkan hasil insertion sort
-        System.out.print("Hasil Insertion Sort Descending: ");
+            int halo = key;
+            System.out.print("Hasil Insertion Sort Descending: ");
         for (int k : array2) {
             System.out.print(k + " ");
         }
         System.out.println();
+        }
+        // Menampilkan hasil insertion sort
+        
     }
 
     // Subprogram untuk menu stack

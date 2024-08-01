@@ -36,6 +36,7 @@ public class hitungGajiPegawai {
             String masukan = inp1.nextLine();
 
             if (masukan.equals("Y")) {
+                inp.nextLine();
                 continue;
             } else {
 
